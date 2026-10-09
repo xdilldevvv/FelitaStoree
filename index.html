@@ -1,0 +1,3092 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>FelitaStore.ID — Premium Apps Store</title>
+<meta name="description" content="Toko aplikasi premium terpercaya — Netflix, Spotify, YouTube, CapCut, Canva & Noktel Telegram dengan harga terjangkau.">
+<meta name="theme-color" content="#1c0f2e">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪐</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1c0f2e;
+    --surface: #271640;
+    --surface2: #32204f;
+    --border: rgba(255,170,220,0.14);
+    --text: #fff1fa;
+    --muted: #c8a6dd;
+    --netflix: #e50914;
+    --spotify: #b24bf3;
+    --youtube: #ff0000;
+    --capcut: #ff5fa2;
+    --canva: #7c3aed;
+    --telegram: #2aabee;
+    --accent: #ff5fa2;
+    --gold: #b24bf3;
+    --wa: #25d366;
+    --glow-netflix: 0 0 40px rgba(229,9,20,0.3);
+    --glow-spotify: 0 0 40px rgba(178,75,243,0.35);
+    --glow-youtube: 0 0 40px rgba(255,0,0,0.3);
+    --glow-capcut: 0 0 40px rgba(255,95,162,0.35);
+    --glow-canva: 0 0 40px rgba(124,58,237,0.3);
+    --glow-telegram: 0 0 40px rgba(42,171,238,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #ff5fa2, #b24bf3, #ff5fa2);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-wa {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--wa);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .nav-wa:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-orbs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .orb-1 { width: 400px; height: 400px; background: rgba(255,95,162,0.18); top: 10%; left: -10%; animation-delay: 0s; }
+  .orb-2 { width: 350px; height: 350px; background: rgba(178,75,243,0.15); top: 20%; right: -5%; animation-delay: -2s; }
+  .orb-3 { width: 300px; height: 300px; background: rgba(255,170,224,0.14); bottom: 10%; left: 30%; animation-delay: -4s; }
+  .orb-4 { width: 250px; height: 250px; background: rgba(199,120,255,0.14); top: 60%; right: 10%; animation-delay: -6s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,95,162,0.12);
+    border: 1px solid rgba(255,107,53,0.3);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .hero h1 .line-2 {
+    background: linear-gradient(90deg, #ff5fa2, #b24bf3, #00b4d8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    animation: fadeUp 0.6s ease 0.2s both;
+    font-weight: 400;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff5fa2, #b24bf3);
+    border: none;
+    border-radius: 100px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(255,95,162,0.5);
+  }
+
+  .btn-outline {
+    padding: 14px 32px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .app-logos {
+    margin-top: 60px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+
+  .app-logo-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .app-logo-pill:hover {
+    transform: translateY(-3px);
+    cursor: pointer;
+  }
+
+  .app-logo-pill svg { width: 18px; height: 18px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    padding: 28px 40px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff5fa2, #b24bf3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 12px;
+    font-weight: 400;
+  }
+
+  /* ─── APP SECTIONS ─── */
+  .app-section {
+    margin-bottom: 80px;
+    scroll-margin-top: 80px;
+  }
+
+  .app-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .app-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-icon svg { width: 28px; height: 28px; }
+
+  .app-title-group h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .app-title-group span {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ─── PRICE GRID ─── */
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .price-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .price-card:hover::before { opacity: 1; }
+
+  /* Netflix theme */
+  .netflix-card::before { background: linear-gradient(90deg, var(--netflix), #ff6b6b); }
+  .netflix-card:hover { box-shadow: var(--glow-netflix); }
+
+  /* Spotify theme */
+  .spotify-card::before { background: linear-gradient(90deg, var(--spotify), #4ade80); }
+  .spotify-card:hover { box-shadow: var(--glow-spotify); }
+
+  /* Youtube theme */
+  .youtube-card::before { background: linear-gradient(90deg, var(--youtube), #ff6b6b); }
+  .youtube-card:hover { box-shadow: var(--glow-youtube); }
+
+  /* Capcut theme */
+  .capcut-card::before { background: linear-gradient(90deg, var(--capcut), #818cf8); }
+  .capcut-card:hover { box-shadow: var(--glow-capcut); }
+
+  /* Canva theme */
+  .canva-card::before { background: linear-gradient(90deg, var(--canva), #c084fc); }
+  .canva-card:hover { box-shadow: var(--glow-canva); }
+
+  .card-plan {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .card-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .card-price {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+
+  .card-price sup {
+    font-size: 0.7rem;
+    font-weight: 600;
+    vertical-align: top;
+    margin-top: 5px;
+    display: inline-block;
+    color: var(--muted);
+  }
+
+  .card-add-btn {
+    margin-top: 16px;
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .card-add-btn:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .badge-popular {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: linear-gradient(135deg, #ff5fa2, #b24bf3);
+    color: var(--bg);
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ─── Badge jumlah item keranjang (dipakai di tab "Pesan" bottom nav) ─── */
+  .app-nav-item .cart-count {
+    position: absolute;
+    top: 2px;
+    right: 14px;
+    background: var(--gold);
+    color: #fff;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    font-weight: 800;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── ORDER FORM ─── */
+  .order-form-section {
+    padding: 80px 40px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .order-form-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--muted);
+  }
+
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    transition: border-color 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--accent);
+  }
+
+  .form-textarea { resize: vertical; min-height: 100px; }
+
+  .form-select option { background: #1a1a26; }
+
+  /* ─── HOW IT WORKS ─── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+  }
+
+  .step-num {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,215,0,0.2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .step-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* ─── WHY US ─── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px;
+    transition: transform 0.2s;
+  }
+
+  .feature-card:hover { transform: translateY(-3px); }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,95,162,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .feature-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+  .feature-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 48px 40px 28px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-top: 12px;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: var(--muted);
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+
+  .footer-col a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--text); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-ig {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-ig:hover { color: var(--text); }
+
+  /* ─── WA FLOAT ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--wa);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: pulse-wa 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 32px rgba(37,211,102,0.65); }
+  }
+
+  .wa-float:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 9000;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transform: translateX(120%);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    max-width: 300px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  .toast.show { transform: translateX(0); }
+  .toast-icon { font-size: 1.1rem; }
+
+  /* ─── PAYMENT ─── */
+  .pay-section-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pay-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .pay-method {
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 12px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .pay-method:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.2); }
+
+  .pay-method.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(255,95,162,0.25);
+    background: rgba(255,95,162,0.07);
+  }
+
+  .pay-method.active::after {
+    content: '✓';
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff5fa2, #b24bf3);
+    color: var(--bg);
+    font-size: 0.7rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pay-logo {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.3px;
+  }
+
+  .pay-name { font-size: 0.82rem; font-weight: 700; }
+  .pay-type { font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+
+  .pay-detail {
+    display: none;
+    margin-top: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .pay-detail.show { display: block; }
+
+  .pay-detail-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pay-detail-head span { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+
+  .pay-total {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #ff5fa2, #b24bf3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .pay-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .pay-row-label { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
+  .pay-row-value { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.5px; word-break: break-all; }
+
+  .pay-copy {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .pay-copy:hover { background: rgba(255,95,162,0.1); border-color: var(--accent); }
+
+  .pay-qris {
+    display: none;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .pay-qris.show { display: block; }
+
+  .pay-qris-box {
+    width: 200px; height: 200px;
+    margin: 0 auto 10px;
+    background: white;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .pay-qris-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+
+  .pay-steps {
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 18px;
+  }
+
+  .pay-steps b { color: var(--text); }
+
+  .pay-note {
+    margin-top: 14px;
+    background: rgba(255,95,162,0.08);
+    border: 1px solid rgba(255,95,162,0.2);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 0.78rem;
+    color: var(--accent);
+    line-height: 1.6;
+  }
+
+  .pay-secure {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 768px) {
+    .pay-methods { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ─── AUTH ─── */
+  .nav-right { display:flex; align-items:center; gap:12px; }
+
+
+  /* ─── PANEL ADMIN (buka dengan #admin) ─── */
+  .adm-section { padding: 110px 20px 90px; }
+  .adm-wrap { max-width: 720px; margin: 0 auto; }
+  .adm-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:20px; margin-bottom:18px; }
+  .adm-card label { display:block; font-size:.75rem; font-weight:600; color:var(--muted); margin:14px 0 6px; }
+  .adm-card label:first-child { margin-top:0; }
+  .adm-card input:not([type=checkbox]), .adm-card textarea, .adm-card select {
+    width:100%; background:var(--bg); border:1px solid var(--border); border-radius:12px; color:var(--text);
+    font-family:inherit; font-size:.88rem; padding:11px 14px; outline:none;
+  }
+  .adm-card textarea { min-height:90px; resize:vertical; }
+  .adm-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:560px){ .adm-row { grid-template-columns:1fr; } }
+  .adm-check { display:flex !important; align-items:center; gap:8px; cursor:pointer; color:var(--text) !important; }
+  .adm-btn { border:none; border-radius:100px; padding:12px 24px; margin-top:18px; font-family:inherit; font-weight:700; font-size:.85rem; color:#fff; cursor:pointer; background:linear-gradient(135deg,#ff5fa2,#b24bf3); }
+  .adm-ghost { background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:100px; padding:7px 14px; font-family:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
+  .adm-ghost:hover { border-color:var(--accent); color:var(--accent); }
+  .adm-ghost.del:hover { border-color:#ff4444; color:#ff4444; }
+  .adm-acts { display:flex; flex-wrap:wrap; gap:8px; }
+  .adm-item { border-top:1px solid var(--border); padding:14px 0; }
+  .adm-item:first-child { border-top:none; padding-top:0; }
+  .adm-item h4 { font-size:.92rem; font-weight:700; margin-bottom:4px; }
+  .adm-item p { font-size:.78rem; color:var(--muted); line-height:1.6; white-space:pre-wrap; word-break:break-word; }
+  .adm-tags { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px; }
+  .adm-tag { font-size:.65rem; font-weight:700; padding:3px 9px; border-radius:100px; background:rgba(255,95,162,.14); color:var(--accent); }
+  .adm-tag.off { background:rgba(255,255,255,.08); color:var(--muted); }
+  .adm-warn { background:rgba(255,200,60,.1); border:1px solid rgba(255,200,60,.35); color:#ffd77a; border-radius:12px; padding:12px 14px; font-size:.78rem; line-height:1.6; margin-bottom:18px; }
+  .adm-msg { font-size:.78rem; margin-top:10px; min-height:1.1em; }
+
+  /* ─── BROADCAST PROMO ─── */
+  .promo-section { padding: 110px 20px 70px; }
+  .promo-wrap { max-width: 760px; margin: 0 auto; }
+  .promo-list { display: flex; flex-direction: column; gap: 14px; }
+  .promo-card {
+    position: relative; overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px; padding: 20px 20px 18px;
+  }
+  .promo-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--spotify)); }
+  .promo-card.pinned { border-color: rgba(255,95,162,0.45); box-shadow: 0 0 30px rgba(255,95,162,0.12); }
+  .promo-card.is-new::after {
+    content:'BARU'; position:absolute; top:14px; right:14px;
+    background: var(--accent); color:#fff; font-size:0.6rem; font-weight:800;
+    padding:3px 9px; border-radius:100px; letter-spacing:0.5px;
+  }
+  .promo-meta { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:10px; font-size:0.7rem; color:var(--muted); }
+  .promo-type { background:rgba(255,95,162,0.14); color:var(--accent); font-weight:700; padding:3px 10px; border-radius:100px; }
+  .promo-title { font-size:1.05rem; font-weight:800; margin-bottom:6px; padding-right:48px; }
+  .promo-body { font-size:0.85rem; color:var(--muted); line-height:1.7; white-space:pre-wrap; word-break:break-word; }
+  .promo-code {
+    display:inline-flex; align-items:center; gap:8px; margin-top:12px;
+    background:rgba(178,75,243,0.14); border:1px dashed rgba(178,75,243,0.6);
+    color:var(--text); font-weight:800; letter-spacing:1px; font-size:0.85rem;
+    padding:8px 14px; border-radius:10px; cursor:pointer; font-family:'Poppins',sans-serif;
+  }
+  .promo-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .promo-link {
+    display:inline-flex; align-items:center; padding:9px 18px; border-radius:100px;
+    background:linear-gradient(135deg,#ff5fa2,#b24bf3); color:#fff; text-decoration:none;
+    font-size:0.78rem; font-weight:700;
+  }
+  .promo-empty { text-align:center; color:var(--muted); font-size:0.88rem; padding:50px 10px; }
+  .app-nav-item .promo-dot {
+    position:absolute; top:2px; right:16px; min-width:16px; height:16px; padding:0 4px;
+    border-radius:100px; background:var(--accent); color:#fff;
+    font-size:0.6rem; font-weight:800; display:none; align-items:center; justify-content:center;
+  }
+  .nav-promo {
+    position:relative; display:flex; align-items:center; gap:6px;
+    padding:10px 16px; background:transparent; border:1.5px solid rgba(255,95,162,0.5);
+    border-radius:100px; color:var(--accent); font-family:'Poppins',sans-serif;
+    font-size:0.82rem; font-weight:600; cursor:pointer;
+    transition:background 0.2s, transform 0.2s;
+  }
+  .nav-promo:hover { background:rgba(255,95,162,0.12); transform:translateY(-2px); }
+  .nav-promo .promo-dot-top {
+    display:none; min-width:16px; height:16px; padding:0 4px; border-radius:100px;
+    background:var(--accent); color:#fff; font-size:0.6rem; font-weight:800;
+    align-items:center; justify-content:center;
+  }
+  .promo-pop-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9500;
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    opacity:0; pointer-events:none; transition:opacity 0.25s;
+  }
+  .promo-pop-overlay.open { opacity:1; pointer-events:all; }
+  .promo-pop {
+    position:relative; width:100%; max-width:400px;
+    background:var(--surface2); border:1px solid var(--border);
+    border-radius:22px; padding:30px 24px 24px; text-align:center;
+    box-shadow:0 24px 60px rgba(0,0,0,0.6);
+    transform:translateY(16px) scale(0.97); transition:transform 0.25s;
+  }
+  .promo-pop-overlay.open .promo-pop { transform:none; }
+  .promo-pop-close {
+    position:absolute; top:12px; right:12px; width:30px; height:30px; border-radius:50%;
+    background:transparent; border:1px solid var(--border); color:var(--muted); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .promo-pop-icon { font-size:2.2rem; margin-bottom:8px; }
+  .promo-pop h3 { font-size:1.2rem; font-weight:800; margin-bottom:8px; }
+  .promo-pop p { font-size:0.85rem; color:var(--muted); line-height:1.7; white-space:pre-wrap; word-break:break-word; }
+  @media (max-width: 768px) {
+    .nav-promo { display:none; }
+    .promo-section { padding-top: 96px; }
+  }
+
+
+  /* Telegram / Noktel theme */
+  .telegram-card::before { background: linear-gradient(90deg, var(--telegram), #1e96c8); }
+  .telegram-card:hover { box-shadow: var(--glow-telegram); }
+
+  .tg-logo-badge {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #37aee2, #1e96c8);
+    box-shadow: 0 0 30px rgba(42,171,238,0.45), inset 0 0 0 2px rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .tg-logo-badge svg { width: 30px; height: 30px; margin-left: -2px; }
+
+  .tg-mini { width: 15px; height: 15px; vertical-align: -3px; margin-right: 5px; }
+
+  .tg-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(42,171,238,0.12);
+    border: 1px solid rgba(42,171,238,0.3);
+    color: var(--telegram);
+    font-size: 0.65rem; font-weight: 700;
+    padding: 3px 9px; border-radius: 100px;
+    margin-top: 8px; letter-spacing: 0.3px;
+  }
+
+  /* ─── TRUST BAR (gaya landing rifkypremium.store) ─── */
+  .trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    max-width: 760px;
+    margin: 34px auto 0;
+    padding: 16px 28px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    position: relative;
+    z-index: 2;
+  }
+  .trust-item { display: flex; align-items: center; gap: 10px; }
+  .trust-icon {
+    width: 34px; height: 34px; flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,95,162,0.18), rgba(178,75,243,0.18));
+    border: 1px solid rgba(255,95,162,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .trust-item div { display: flex; flex-direction: column; line-height: 1.25; }
+  .trust-item b { font-size: 0.86rem; font-weight: 800; }
+  .trust-item span { font-size: 0.68rem; color: var(--muted); }
+  .trust-sep { width: 1px; height: 26px; background: var(--border); }
+  @media (max-width: 640px) {
+    .trust-bar { gap: 12px; padding: 14px 18px; border-radius: 22px; }
+    .trust-sep { display: none; }
+  }
+
+  .app-section { scroll-margin-top: 100px; }
+
+  /* ─── APP SCREENS (Beranda / Produk / Order terpisah, bukan 1 layar) ─── */
+  .app-screen-section:not(.screen-active) { display: none !important; }
+  .app-screen-section.screen-active { display: block; animation: screen-fade 0.3s ease; }
+  @keyframes screen-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── BANTUAN / KENDALA ─── */
+  .help-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(255,95,162,0.12), rgba(178,75,243,0.12));
+    border: 1px solid rgba(255,95,162,0.3);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin: 0 0 24px;
+  }
+  .help-banner-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--spotify));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 0 20px rgba(255,95,162,0.4);
+  }
+  .help-banner-text { flex: 1; }
+  .help-banner-text b { font-size: 0.85rem; display: block; }
+  .help-banner-text span { font-size: 0.75rem; color: var(--muted); }
+  .help-banner-actions {
+    flex-shrink: 0;
+    display: flex;
+    gap: 8px;
+  }
+  .help-banner-btn {
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: 6px;
+    background: var(--wa);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.75rem; font-weight: 700;
+    padding: 9px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .help-banner-btn:hover { transform: translateY(-2px); }
+  .help-banner-btn.tg { background: var(--telegram); box-shadow: 0 4px 14px rgba(42,171,238,0.35); }
+  .help-banner-btn.wa { box-shadow: 0 4px 14px rgba(37,211,102,0.35); }
+  @media (max-width: 480px) {
+    .help-banner { flex-wrap: wrap; }
+    .help-banner-actions { width: 100%; }
+    .help-banner-btn { flex: 1; justify-content: center; }
+  }
+
+  /* ─── STARFIELD (dekorasi bintang kosmik, tema planet) ─── */
+  #stars-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .star-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.9; }
+  }
+
+  /* ─── PLANET DECOR (tema planet pink lucu) ─── */
+  .planet-deco {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: planet-float 10s ease-in-out infinite;
+  }
+  @keyframes planet-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(8deg); }
+  }
+  .planet-1 {
+    width: 90px; height: 90px; top: 8%; right: 6%;
+    background: radial-gradient(circle at 32% 30%, #ffd6ec, var(--accent) 65%, #c2409c 100%);
+    box-shadow: 0 0 50px rgba(255,95,162,0.5);
+  }
+  .planet-1::after {
+    content:'';
+    position: absolute; left: -22%; top: 42%;
+    width: 144%; height: 16%;
+    background: rgba(255,255,255,0.55);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+  }
+  .planet-2 {
+    width: 46px; height: 46px; top: 60%; left: 4%;
+    background: radial-gradient(circle at 35% 30%, #efd6ff, var(--spotify) 70%, #6b1fa8 100%);
+    box-shadow: 0 0 36px rgba(178,75,243,0.5);
+    animation-delay: -3s;
+  }
+  .sparkle {
+    position: absolute;
+    font-size: 1.1rem;
+    animation: sparkle-twinkle 2.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes sparkle-twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  /* ─── BOTTOM APP NAV (gaya aplikasi mobile) ─── */
+  .app-bottom-nav {
+    position: fixed;
+    top: auto;
+    bottom: 0; left: 0; right: 0;
+    z-index: 950;
+    display: none;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 8px 6px calc(8px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.35);
+  }
+  .app-bottom-nav-inner {
+    display: flex;
+    justify-content: space-around;
+  }
+  .app-nav-item {
+    background: none; border: none;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    color: var(--muted);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.62rem; font-weight: 600;
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .app-nav-item.active { color: var(--accent); background: rgba(255,95,162,0.1); }
+  .app-nav-item svg { width: 20px; height: 20px; }
+
+  @media (max-width: 768px) {
+    .app-bottom-nav { display: block; }
+    body { padding-bottom: 64px; }
+    .wa-float { bottom: 78px; }
+  }
+
+  /* ─── PAYMENT SCREEN (halaman terpisah bergaya app) ─── */
+  .payment-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    background: var(--bg);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .payment-screen.open { transform: translateX(0); }
+
+  .payment-screen-bar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .payment-back {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .payment-screen-title { font-size: 1rem; font-weight: 800; }
+
+  .payment-screen-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 20px 40px;
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* ─── LOGO SIZING ─── */
+  .app-icon { width:56px; height:56px; flex-shrink:0; }
+  .app-icon svg { width:56px !important; height:56px !important; border-radius:14px; filter:drop-shadow(0 4px 14px rgba(0,0,0,0.45)); }
+  .app-logo-pill svg { width:24px !important; height:24px !important; border-radius:7px; }
+  .tg-mini { width:17px !important; height:17px !important; vertical-align:-4px; }
+  .pay-logo-svg { width:52px; height:52px; display:block; margin:0 auto 10px; border-radius:13px; box-shadow:0 4px 14px rgba(0,0,0,0.4); }
+  .cart-item-icon svg { border-radius:10px; }
+
+  /* ─── PRICE SLIDER ─── */
+  .slider { position:relative; }
+
+  .price-grid.slider-track {
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:12px 6px 34px;
+    margin:-12px -6px -34px;
+  }
+  .price-grid.slider-track::-webkit-scrollbar { display:none; }
+
+  .price-grid.slider-track .price-card {
+    flex:0 0 240px;
+    scroll-snap-align:start;
+  }
+
+  .slider-btn {
+    position:absolute;
+    top:calc(50% - 22px);
+    width:44px; height:44px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.12);
+    background:rgba(18,18,26,0.92);
+    backdrop-filter:blur(10px);
+    color:var(--text);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    z-index:5;
+    box-shadow:0 8px 24px rgba(0,0,0,0.5);
+    transition:transform 0.2s, background 0.2s, border-color 0.2s, opacity 0.2s, box-shadow 0.2s;
+  }
+  .slider-btn svg { width:18px; height:18px; }
+  .slider-btn:hover {
+    background:linear-gradient(135deg,#ff5fa2,#b24bf3);
+    border-color:transparent;
+    color:var(--bg);
+    transform:scale(1.1);
+    box-shadow:0 8px 24px rgba(255,95,162,0.45);
+  }
+  .slider-btn.prev { left:-14px; }
+  .slider-btn.next { right:-14px; }
+  .slider-btn.hide { opacity:0; pointer-events:none; }
+
+  .slider-bar {
+    height:3px;
+    background:var(--surface2);
+    border-radius:100px;
+    margin-top:26px;
+    overflow:hidden;
+  }
+  .slider-bar-fill {
+    height:100%; width:30%;
+    background:linear-gradient(90deg,#ff5fa2,#b24bf3);
+    border-radius:100px;
+    transition:width 0.15s, margin-left 0.15s;
+  }
+
+  .slider-hint {
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.72rem; color:var(--muted); margin-top:10px;
+  }
+
+  @media (max-width:768px) {
+    .price-grid.slider-track .price-card { flex:0 0 210px; }
+    .slider-btn { width:38px; height:38px; top:calc(50% - 19px); }
+    .slider-btn.prev { left:-8px; }
+    .slider-btn.next { right:-8px; }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .section { padding: 60px 20px; }
+    .stats-bar { gap: 30px; padding: 20px; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .order-form-section { padding: 60px 20px; }
+  }
+  /* ─── DEVELOPER SCREEN ─── */
+  .dev-section { padding: 110px 20px 70px; }
+  .dev-wrap { max-width: 860px; margin: 0 auto; }
+  .dev-back {
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--surface2); border:1px solid var(--border); color:var(--text);
+    padding:8px 16px; border-radius:100px; cursor:pointer;
+    font-family:'Poppins',sans-serif; font-size:0.78rem; font-weight:600;
+    margin-bottom:26px; transition:border-color .2s;
+  }
+  .dev-back:hover { border-color: rgba(255,95,162,0.5); }
+  .dev-card {
+    text-align:center; background:var(--surface); border:1px solid var(--border);
+    border-radius:22px; padding:34px 24px; position:relative; overflow:hidden;
+  }
+  .dev-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--spotify)); }
+  .dev-avatar {
+    width:84px; height:84px; margin:0 auto 14px; border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--spotify));
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.2rem; font-weight:900; color:#fff;
+    box-shadow:0 0 36px rgba(255,95,162,0.45); overflow:hidden;
+  }
+  .dev-avatar img { width:100%; height:100%; object-fit:cover; }
+  .dev-name { font-size:1.35rem; font-weight:800; }
+  .dev-role { font-size:0.82rem; color:var(--accent); font-weight:600; margin-top:2px; }
+  .dev-bio { font-size:0.85rem; color:var(--muted); line-height:1.7; max-width:520px; margin:14px auto 0; }
+  .dev-bio:empty { display:none; }
+  .dev-links { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .dev-link {
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+    background:var(--surface2); border:1px solid var(--border); color:var(--text);
+    padding:9px 16px; border-radius:100px; font-size:0.78rem; font-weight:600;
+    transition:transform .2s, border-color .2s;
+  }
+  .dev-link:hover { transform:translateY(-2px); border-color:rgba(255,95,162,0.5); }
+  .dev-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  .dev-box { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px; }
+  .dev-box h4 { font-size:0.85rem; font-weight:800; margin-bottom:14px; }
+  .dev-row { display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-bottom:1px solid var(--border); font-size:0.8rem; }
+  .dev-row:last-child { border-bottom:none; }
+  .dev-row span { color:var(--muted); }
+  .dev-row b { text-align:right; font-weight:600; }
+  .dev-tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .dev-tags span {
+    background:rgba(255,95,162,0.1); border:1px solid rgba(255,95,162,0.25); color:var(--text);
+    font-size:0.72rem; font-weight:600; padding:5px 12px; border-radius:100px;
+  }
+  .footer-dev-link { color:var(--accent); text-decoration:none; font-weight:600; }
+  .footer-dev-link:hover { text-decoration:underline; }
+  @media (max-width: 640px) { .dev-grid { grid-template-columns:1fr; } .dev-section { padding-top:96px; } }
+
+  /* ─── RAPI: PENYESUAIAN LAYAR HP ─── */
+  @media (max-width: 640px) {
+    nav { padding: 12px 14px; }
+    nav .logo { font-size: 1.15rem; }
+    .nav-right { gap: 8px; }
+    .nav-wa { padding: 9px 14px; font-size: 0.78rem; }
+
+    .hero { padding: 104px 18px 56px; min-height: auto; }
+    .hero h1 { font-size: clamp(2.1rem, 10vw, 2.8rem); }
+    .hero-badge { font-size: 0.7rem; padding: 6px 14px; }
+    .planet-1 { width: 46px; height: 46px; top: 76px; right: 10px; }
+    .planet-2, .sparkle { display: none; }
+
+    .hero-ctas { gap: 10px; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 13px 22px; font-size: 0.85rem; }
+
+    .app-logos { margin-top: 34px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 360px; }
+    .app-logo-pill { justify-content: center; padding: 9px 6px; font-size: 0.72rem; gap: 6px; }
+    .app-logo-pill svg { width: 20px !important; height: 20px !important; }
+
+    .trust-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 14px 10px; border-radius: 20px; width: 100%; max-width: 360px; margin-top: 22px; }
+    .trust-item { flex-direction: column; text-align: center; gap: 6px; }
+    .trust-item div { align-items: center; }
+    .trust-item b { font-size: 0.78rem; }
+    .trust-item span { font-size: 0.62rem; }
+
+    .stats-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; padding: 22px 18px; }
+    .stat-num { font-size: 1.5rem; }
+
+    .wa-float { padding: 0; width: 46px; height: 46px; justify-content: center; bottom: 78px; left: 14px; }
+    .wa-float-text { display: none; }
+    .section { padding: 48px 18px; }
+    .order-form-section { padding: 90px 18px 56px; }
+    .app-section { margin-bottom: 44px; }
+  }
+
+  /* ─── RAPI: DESKTOP ─── */
+  @media (min-width: 769px) {
+    .hero { padding-top: 130px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div id="stars-bg"></div>
+
+<!-- LOGO SPRITE (produk & pembayaran) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-canva" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#00c4cc"/><stop offset="1" stop-color="#7d2ae8"/></linearGradient>
+    <linearGradient id="g-tg" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="#37aee2"/><stop offset="1" stop-color="#1e96c8"/></linearGradient>
+  </defs>
+
+  <symbol id="logo-netflix" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#000"/>
+    <path d="M15 9h5.5v30H15z" fill="#b1060f"/>
+    <path d="M27.5 9H33v30h-5.5z" fill="#b1060f"/>
+    <path d="M15 9h5.6L33 39h-5.6z" fill="#e50914"/>
+  </symbol>
+
+  <symbol id="logo-spotify" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#000"/>
+    <circle cx="24" cy="24" r="16" fill="#1ed760"/>
+    <g fill="none" stroke="#000" stroke-linecap="round">
+      <path d="M14.5 19.2c6.5-1.9 14.5-1.3 20.2 2.2" stroke-width="3"/>
+      <path d="M15.6 25.3c5.5-1.5 12-1 16.8 1.9" stroke-width="2.5"/>
+      <path d="M16.6 30.8c4.4-1.2 9.2-.8 13.1 1.5" stroke-width="2"/>
+    </g>
+  </symbol>
+
+  <symbol id="logo-youtube" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#fff"/>
+    <rect x="7" y="13" width="34" height="22" rx="7" fill="#f00"/>
+    <path d="M20 19l11 5-11 5z" fill="#fff"/>
+  </symbol>
+
+  <symbol id="logo-capcut" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#000"/>
+    <path d="M31 15.5A11 11 0 1 0 31 32.5" fill="none" stroke="#fff" stroke-width="5"/>
+    <path d="M22.5 27.5L35 19.5v5.5l-9 5.8z" fill="#fff"/>
+  </symbol>
+
+  <symbol id="logo-canva" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="24" fill="url(#g-canva)"/>
+    <text x="24" y="28.5" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="12.5" font-weight="700" font-style="italic" fill="#fff">Canva</text>
+  </symbol>
+
+  <symbol id="logo-telegram" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="24" fill="url(#g-tg)"/>
+    <g transform="translate(6.4 5.2) scale(1.55)"><path d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="#fff"/></g>
+  </symbol>
+
+  <symbol id="pay-qris" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#fff"/>
+    <g fill="none" stroke="#e11b22" stroke-width="2.6">
+      <rect x="8" y="7" width="10" height="10" rx="1.5"/>
+      <rect x="30" y="7" width="10" height="10" rx="1.5"/>
+    </g>
+    <g fill="#1a1a1a"><rect x="11.2" y="10.2" width="3.6" height="3.6"/><rect x="33.2" y="10.2" width="3.6" height="3.6"/><rect x="21" y="7" width="4" height="4"/><rect x="25" y="13" width="4" height="4"/></g>
+    <text x="24" y="35.5" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="13" font-weight="900" fill="#e11b22" letter-spacing="0.5">QRIS</text>
+    <rect x="9" y="40" width="30" height="2" rx="1" fill="#1a1a1a"/>
+  </symbol>
+
+  <symbol id="pay-dana" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#118eea"/>
+    <text x="24" y="29" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="13.5" font-weight="900" fill="#fff" letter-spacing="0.4">DANA</text>
+  </symbol>
+
+  <symbol id="pay-ovo" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#4c3494"/>
+    <text x="24" y="30" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="18" font-weight="900" font-style="italic" fill="#fff">OVO</text>
+  </symbol>
+
+  <symbol id="pay-gopay" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#fff"/>
+    <text x="24" y="29" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="12.5" font-weight="800"><tspan fill="#00aed6">go</tspan><tspan fill="#0b3d91">pay</tspan></text>
+  </symbol>
+
+  <symbol id="pay-bca" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#fff"/>
+    <text x="24" y="28" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="16" font-weight="900" fill="#0060af">BCA</text>
+    <rect x="10" y="33" width="28" height="3" rx="1.5" fill="#1ba3e0"/>
+  </symbol>
+
+  <symbol id="pay-bri" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="11" fill="#00529c"/>
+    <text x="24" y="28" text-anchor="middle" font-family="Poppins,Arial,sans-serif" font-size="16" font-weight="900" fill="#fff">BRI</text>
+    <rect x="10" y="33" width="28" height="3" rx="1.5" fill="#f58220"/>
+  </symbol>
+</svg>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">FelitaStore<span style="color:#fff">.ID</span></div>
+  <ul class="nav-links">
+    <li><a href="#netflix" onclick="goToProduct('netflix');return false;">Netflix</a></li>
+    <li><a href="#spotify" onclick="goToProduct('spotify');return false;">Spotify</a></li>
+    <li><a href="#youtube" onclick="goToProduct('youtube');return false;">YouTube</a></li>
+    <li><a href="#capcut" onclick="goToProduct('capcut');return false;">CapCut</a></li>
+    <li><a href="#canva" onclick="goToProduct('canva');return false;">Canva</a></li>
+    <li><a href="#noktel" onclick="goToProduct('noktel');return false;">Noktel</a></li>
+    <li><a href="#order" onclick="showScreen('order');return false;">Pesan</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-promo" onclick="showScreen('promo')">
+      <span>🎁 Promo</span><span class="promo-dot-top" id="promo-dot-top">0</span>
+    </button>
+    <a href="https://wa.me/6285167846280?text=Halo%20FelitaStore.ID!%20Saya%20ingin%20konsultasi%20mengenai%20pembelian%20aplikasi%20premium." target="_blank" class="nav-wa">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="nav-wa-text">Konsultasi</span>
+  </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero app-screen-section screen-home screen-active">
+  <div class="hero-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="planet-deco planet-1"></div>
+    <div class="planet-deco planet-2"></div>
+    <div class="sparkle" style="top:14%;left:10%;animation-delay:0s;">✨</div>
+    <div class="sparkle" style="top:28%;right:16%;animation-delay:0.6s;">⭐</div>
+    <div class="sparkle" style="bottom:22%;left:14%;animation-delay:1.2s;">🌟</div>
+    <div class="sparkle" style="bottom:16%;right:10%;animation-delay:1.8s;">✨</div>
+  </div>
+
+  <div class="hero-badge">
+    <span>⚡</span> Harga Terjangkau, Kualitas Premium
+  </div>
+
+  <h1>
+    Nikmati Semua<br>
+    <span class="line-2">Aplikasi Premium</span><br>
+    Tanpa Ribet
+  </h1>
+
+  <p>Netflix, Spotify, YouTube, CapCut, Canva & Noktel Telegram — semua tersedia di satu tempat dengan harga terbaik. Aktif dalam hitungan menit!</p>
+
+  <div class="hero-ctas">
+    <a href="#netflix" class="btn-primary" onclick="goToProduct('netflix');return false;">🛒 Lihat Harga</a>
+    <a href="https://wa.me/6285167846280?text=Halo%20FelitaStore.ID!%20Saya%20ingin%20konsultasi%20mengenai%20pembelian%20aplikasi%20premium." target="_blank" class="btn-outline">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat WA
+    </a>
+  </div>
+
+  <div class="app-logos">
+    <div class="app-logo-pill" onclick="goToProduct('netflix')">
+      <svg viewBox="0 0 48 48"><use href="#logo-netflix"/></svg>
+      Netflix
+    </div>
+    <div class="app-logo-pill" onclick="goToProduct('spotify')">
+      <svg viewBox="0 0 48 48"><use href="#logo-spotify"/></svg>
+      Spotify
+    </div>
+    <div class="app-logo-pill" onclick="goToProduct('youtube')">
+      <svg viewBox="0 0 48 48"><use href="#logo-youtube"/></svg>
+      YouTube
+    </div>
+    <div class="app-logo-pill" onclick="goToProduct('capcut')">
+      <svg viewBox="0 0 48 48"><use href="#logo-capcut"/></svg>
+      CapCut
+    </div>
+    <div class="app-logo-pill" onclick="goToProduct('canva')">
+      <svg viewBox="0 0 48 48"><use href="#logo-canva"/></svg>
+      Canva
+    </div>
+    <div class="app-logo-pill" onclick="goToProduct('noktel')">
+      <svg viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>
+      Noktel
+    </div>
+  </div>
+
+  <div class="trust-bar">
+    <div class="trust-item">
+      <span class="trust-icon">⭐</span>
+      <div><b>4.9/5</b><span>500+ Ulasan</span></div>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <span class="trust-icon">⚡</span>
+      <div><b>1–5 Menit</b><span>Proses Kilat</span></div>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <span class="trust-icon">🛡️</span>
+      <div><b>100%</b><span>Garansi Replace</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar app-screen-section screen-home">
+  <div class="stat-item">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Pelanggan Puas</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Produk Digital</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Support WA</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">⚡ Fast</div>
+    <div class="stat-label">Aktivasi Instan</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section app-screen-section screen-home">
+  <div class="section-header">
+    <div class="section-tag">Cara Pesan</div>
+    <h2 class="section-title">Mudah & Cepat</h2>
+    <p class="section-sub">Proses pemesanan simpel, akun langsung aktif</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">Pilih Paket</div>
+      <div class="step-desc">Pilih produk dan klik paket yang kamu inginkan, otomatis masuk ke keranjang.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">Isi Form Pesanan</div>
+      <div class="step-desc">Masukkan nama dan nomor WhatsApp kamu di form pemesanan, lalu submit.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">Konfirmasi WA</div>
+      <div class="step-desc">Kamu akan diarahkan ke WhatsApp kami untuk konfirmasi pesanan & pembayaran.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-title">Akun Aktif!</div>
+      <div class="step-desc">Setelah pembayaran dikonfirmasi, akun premium langsung aktif dan siap dipakai.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT CATALOG -->
+<section class="section app-screen-section screen-products" style="padding-top: 0;">
+  <div class="section-header">
+    <div class="section-tag">Price List</div>
+    <h2 class="section-title">Daftar Harga Premium</h2>
+    <p class="section-sub">Semua harga sudah termasuk biaya aktivasi</p>
+  </div>
+
+  <!-- NETFLIX -->
+  <div class="app-section" id="netflix">
+    <div class="app-header">
+      <div class="app-icon" style="background:none;"><svg viewBox="0 0 48 48"><use href="#logo-netflix"/></svg>
+      </div>
+      <div class="app-title-group">
+        <h2 style="color:#e50914;">Netflix</h2>
+        <span>Streaming film & series tanpa batas</span>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Hari 1P1U',9000)">
+        <div class="card-plan">Netflix · 1P1U</div>
+        <div class="card-name">1 Hari</div>
+        <div class="card-price"><sup>IDR</sup>9.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Minggu 1P1U',18000)">
+        <div class="card-plan">Netflix · 1P1U</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>18.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Bulan 1P1U',40000)">
+        <div class="card-plan">Netflix · 1P1U</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>40.000</div>
+        <div class="badge-popular">🔥 Populer</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Hari 1P2U',8000)">
+        <div class="card-plan">Netflix · 1P2U</div>
+        <div class="card-name">1 Hari</div>
+        <div class="card-price"><sup>IDR</sup>8.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Minggu 1P2U',15000)">
+        <div class="card-plan">Netflix · 1P2U</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>15.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Bulan 1P2U',30000)">
+        <div class="card-plan">Netflix · 1P2U</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>30.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Hari Semi Private',11000)">
+        <div class="card-plan">Netflix · Semi Private</div>
+        <div class="card-name">1 Hari</div>
+        <div class="card-price"><sup>IDR</sup>11.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Minggu Semi Private',22000)">
+        <div class="card-plan">Netflix · Semi Private</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>22.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Bulan Semi Private',45000)">
+        <div class="card-plan">Netflix · Semi Private</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>45.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Minggu Private',60000)">
+        <div class="card-plan">Netflix · Private</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>60.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card netflix-card" onclick="addToCart('Netflix','1 Bulan Private',155000)">
+        <div class="card-plan">Netflix · Private</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>155.000</div>
+        <div class="badge-popular">👑 VIP</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPOTIFY -->
+  <div class="app-section" id="spotify">
+    <div class="app-header">
+      <div class="app-icon" style="background:none;"><svg viewBox="0 0 48 48"><use href="#logo-spotify"/></svg>
+      </div>
+      <div class="app-title-group">
+        <h2 style="color:#b24bf3;">Spotify</h2>
+        <span>Musik tanpa iklan, kualitas premium</span>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="price-card spotify-card" onclick="addToCart('Spotify','FamPlan 1 Bulan (Acc Seller)',25000)">
+        <div class="card-plan">Spotify · Family Plan</div>
+        <div class="card-name">1 Bulan — Acc Seller</div>
+        <div class="card-price"><sup>IDR</sup>25.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card spotify-card" onclick="addToCart('Spotify','FamPlan 2 Bulan (Acc Seller)',40000)">
+        <div class="card-plan">Spotify · Family Plan</div>
+        <div class="card-name">2 Bulan — Acc Seller</div>
+        <div class="card-price"><sup>IDR</sup>40.000</div>
+        <div class="badge-popular">🔥 Hemat</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card spotify-card" onclick="addToCart('Spotify','IndPlan 1 Bulan Reg US (Acc Seller)',30000)">
+        <div class="card-plan">Spotify · Individual</div>
+        <div class="card-name">1 Bulan Reg US — Acc Seller</div>
+        <div class="card-price"><sup>IDR</sup>30.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUTUBE -->
+  <div class="app-section" id="youtube">
+    <div class="app-header">
+      <div class="app-icon" style="background:none;"><svg viewBox="0 0 48 48"><use href="#logo-youtube"/></svg>
+      </div>
+      <div class="app-title-group">
+        <h2 style="color:#ff4444;">YouTube Premium</h2>
+        <span>Tanpa iklan, download video, background play</span>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="price-card youtube-card" onclick="addToCart('YouTube','FamPlan 1 Bulan',8000)">
+        <div class="card-plan">YouTube · Family Plan</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>8.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card youtube-card" onclick="addToCart('YouTube','FamPlan 2 Bulan',11000)">
+        <div class="card-plan">YouTube · Family Plan</div>
+        <div class="card-name">2 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>11.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card youtube-card" onclick="addToCart('YouTube','IndPlan 1 Bulan',13000)">
+        <div class="card-plan">YouTube · Individual</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>13.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card youtube-card" onclick="addToCart('YouTube','1 Bulan Head',15000)">
+        <div class="card-plan">YouTube · Head</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>15.000</div>
+        <div class="badge-popular">👑 Head</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPCUT -->
+  <div class="app-section" id="capcut">
+    <div class="app-header">
+      <div class="app-icon" style="background:none;"><svg viewBox="0 0 48 48"><use href="#logo-capcut"/></svg>
+      </div>
+      <div class="app-title-group">
+        <h2 style="color:#ff5fa2;">CapCut Pro</h2>
+        <span>Edit video profesional tanpa watermark</span>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="price-card capcut-card" onclick="addToCart('CapCut','3U Sharing 1 Minggu',10000)">
+        <div class="card-plan">CapCut · 3 User Sharing</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>10.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card capcut-card" onclick="addToCart('CapCut','3U Sharing 1 Bulan',16000)">
+        <div class="card-plan">CapCut · 3 User Sharing</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>16.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card capcut-card" onclick="addToCart('CapCut','2U Sharing 1 Minggu',11000)">
+        <div class="card-plan">CapCut · 2 User Sharing</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>11.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card capcut-card" onclick="addToCart('CapCut','2U Sharing 1 Bulan',17000)">
+        <div class="card-plan">CapCut · 2 User Sharing</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>17.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card capcut-card" onclick="addToCart('CapCut','Private 1 Minggu',13000)">
+        <div class="card-plan">CapCut · Private</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>13.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card capcut-card" onclick="addToCart('CapCut','Private 1 Bulan',20000)">
+        <div class="card-plan">CapCut · Private</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>20.000</div>
+        <div class="badge-popular">👑 Private</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANVA -->
+  <div class="app-section" id="canva">
+    <div class="app-header">
+      <div class="app-icon" style="background:none;"><svg viewBox="0 0 48 48"><use href="#logo-canva"/></svg>
+      </div>
+      <div class="app-title-group">
+        <h2 style="color:#a855f7;">Canva Pro</h2>
+        <span>Desain profesional, template premium, tanpa batas</span>
+      </div>
+    </div>
+    <div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:0.82rem;color:#c084fc;">
+      💡 <strong>Info:</strong> Tipe Designer gratis! Bilang aja kalo mau.
+    </div>
+    <div class="price-grid">
+      <div class="price-card canva-card" onclick="addToCart('Canva','1 Hari',2000)">
+        <div class="card-plan">Canva Pro</div>
+        <div class="card-name">1 Hari</div>
+        <div class="card-price"><sup>IDR</sup>2.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','1 Minggu',5000)">
+        <div class="card-plan">Canva Pro</div>
+        <div class="card-name">1 Minggu</div>
+        <div class="card-price"><sup>IDR</sup>5.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','1 Bulan',10000)">
+        <div class="card-plan">Canva Pro</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>10.000</div>
+        <div class="badge-popular">🔥 Populer</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','2 Bulan',12500)">
+        <div class="card-plan">Canva Pro</div>
+        <div class="card-name">2 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>12.500</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','3 Bulan',15000)">
+        <div class="card-plan">Canva Pro</div>
+        <div class="card-name">3 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>15.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','6 Bulan',20000)">
+        <div class="card-plan">Canva Pro</div>
+        <div class="card-name">6 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>20.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','1 Bulan Head',15000)">
+        <div class="card-plan">Canva · Head</div>
+        <div class="card-name">1 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>15.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','2 Bulan Head FW',17000)">
+        <div class="card-plan">Canva · Head FW</div>
+        <div class="card-name">2 Bulan</div>
+        <div class="card-price"><sup>IDR</sup>17.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','1 Tahun Designer',13000)">
+        <div class="card-plan">Canva · Designer</div>
+        <div class="card-name">1 Tahun</div>
+        <div class="card-price"><sup>IDR</sup>13.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card canva-card" onclick="addToCart('Canva','Lifetime EDU (No Renewal)',15000)">
+        <div class="card-plan">Canva · EDU</div>
+        <div class="card-name">Lifetime (No Renewal)</div>
+        <div class="card-price"><sup>IDR</sup>15.000</div>
+        <div class="badge-popular">♾ Lifetime</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOKTEL (NOKOS TELEGRAM) -->
+  <div class="app-section" id="noktel">
+    <div class="app-header">
+      <div class="app-icon" style="background:none;box-shadow:0 0 30px rgba(42,171,238,0.4);border-radius:50%;"><svg viewBox="0 0 48 48"><use href="#logo-telegram"/></svg></div>
+      <div class="app-title-group">
+        <h2 style="color:#2aabee;">Noktel</h2>
+        <span>Nokos Telegram — nomor virtual untuk verifikasi OTP</span>
+        <div><span class="tg-tag">✈ Telegram Number</span></div>
+      </div>
+    </div>
+    <div style="background:rgba(42,171,238,0.08);border:1px solid rgba(42,171,238,0.2);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:0.82rem;color:#5cc0f2;">
+      💡 <strong>Info:</strong> Pilih negara nomor sesuai kebutuhan. Negara lain atau stok terbaru? Tanya admin via WhatsApp.
+    </div>
+    <div class="price-grid">
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Indonesia (+62)',6000)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Indonesia<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+62 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>6.000</div>
+        <div class="badge-popular" style="background:linear-gradient(135deg,#2aabee,#1e96c8);">🔥 Populer</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Amerika Serikat (+1)',3500)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Amerika Serikat<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+1 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>3.500</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Malaysia (+60)',4500)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Malaysia<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+60 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>4.500</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Thailand (+66)',4000)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Thailand<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+66 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>4.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Vietnam (+84)',3000)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Vietnam<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+84 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>3.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Filipina (+63)',3500)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Filipina<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+63 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>3.500</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram India (+91)',3000)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">India<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+91 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>3.000</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Rusia (+7)',4500)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Rusia<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+7 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>4.500</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Inggris (+44)',6500)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Inggris<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">+44 · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>6.500</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+      <div class="price-card telegram-card" onclick="addToCart('Noktel','Nokos Telegram Random Negara (Acak)',2500)">
+        <div class="card-plan"><svg class="tg-mini" viewBox="0 0 48 48"><use href="#logo-telegram"/></svg>Noktel · Telegram</div>
+        <div class="card-name">Random Negara<br><span style="font-size:0.75rem;font-weight:500;color:var(--muted);">Nomor acak · OTP Telegram</span></div>
+        <div class="card-price"><sup>IDR</sup>2.500</div>
+        <div class="badge-popular" style="background:linear-gradient(135deg,#2aabee,#1e96c8);">⚡ Murah</div>
+        <button class="card-add-btn">+ Keranjang</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section app-screen-section screen-home" style="background:var(--surface);padding-top:80px;padding-bottom:80px;max-width:100%;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Keunggulan Kami</div>
+      <h2 class="section-title">Kenapa FelitaStore.ID?</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Aktivasi Instan</div>
+        <div class="feature-desc">Akun langsung aktif setelah pembayaran dikonfirmasi, tanpa waktu tunggu lama.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Harga Terjangkau</div>
+        <div class="feature-desc">Nikmati semua fitur premium dengan harga yang ramah di kantong.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-title">Terpercaya & Aman</div>
+        <div class="feature-desc">Ratusan pelanggan sudah mempercayai FelitaStore.ID untuk kebutuhan premium mereka.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">Support 24/7</div>
+        <div class="feature-desc">Tim kami siap membantu via WhatsApp kapan saja kamu butuh bantuan.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section class="order-form-section app-screen-section screen-order" id="order">
+  <div class="order-form-inner">
+    <div class="section-header">
+      <div class="section-tag">Pesan Sekarang</div>
+      <h2 class="section-title">Form Pemesanan</h2>
+      <p class="section-sub">Isi data kamu, lalu kami akan konfirmasi via WhatsApp</p>
+    </div>
+
+    <div class="help-banner">
+      <div class="help-banner-icon">🛟</div>
+      <div class="help-banner-text">
+        <b>Ada kendala saat mengisi form?</b>
+        <span>Lapor ke admin via WhatsApp atau Telegram</span>
+      </div>
+      <div class="help-banner-actions">
+        <a href="https://wa.me/6285167846280?text=Halo%20FelitaStore.ID%2C%20saya%20ada%20kendala%20saat%20mengisi%20form%20pesanan." target="_blank" class="help-banner-btn wa" title="Lapor via WhatsApp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WA
+        </a>
+        <a href="https://t.me/FelitaStoreID" target="_blank" class="help-banner-btn tg" title="Lapor via Telegram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="#logo-telegram" /></svg>
+          Telegram
+        </a>
+      </div>
+    </div>
+
+    <div id="order-summary" style="background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px;display:none;">
+      <div style="font-size:0.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Ringkasan Pesanan</div>
+      <div id="order-summary-items" style="font-size:0.85rem;"></div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Nama Lengkap *</label>
+      <input type="text" class="form-input" id="cust-name" placeholder="Masukkan nama kamu...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nomor WhatsApp *</label>
+      <input type="text" class="form-input" id="cust-wa" placeholder="0812xxxxxxxx">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Catatan (Opsional)</label>
+      <textarea class="form-textarea" id="cust-note" placeholder="Contoh: minta aktivasi hari ini, dll."></textarea>
+    </div>
+
+    <button class="btn-primary" style="width:100%;justify-content:center;border-radius:14px;font-size:0.95rem;margin-top:10px;" onclick="openPaymentScreen()">
+      Lanjut ke Pembayaran
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- PAYMENT SCREEN (halaman terpisah, seperti screen di aplikasi) -->
+<div class="payment-screen" id="payment-screen">
+  <div class="payment-screen-bar">
+    <button class="payment-back" onclick="closePaymentScreen()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="payment-screen-title">🪐 Pembayaran</div>
+    <div style="width:38px;"></div>
+  </div>
+
+  <div class="payment-screen-body">
+    <div class="help-banner">
+      <div class="help-banner-icon">🛟</div>
+      <div class="help-banner-text">
+        <b>Ada kendala pembayaran?</b>
+        <span>Lapor ke admin via WhatsApp atau Telegram</span>
+      </div>
+      <div class="help-banner-actions">
+        <a href="https://wa.me/6285167846280?text=Halo%20FelitaStore.ID%2C%20saya%20ada%20kendala%20saat%20proses%20pembayaran." target="_blank" class="help-banner-btn wa" title="Lapor via WhatsApp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WA
+        </a>
+        <a href="https://t.me/FelitaStoreID" target="_blank" class="help-banner-btn tg" title="Lapor via Telegram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="#logo-telegram" /></svg>
+          Telegram
+        </a>
+      </div>
+    </div>
+
+    <div class="pay-section-title">💳 Pilih Metode Pembayaran *</div>
+    <div class="pay-methods" id="pay-methods"></div>
+
+    <div class="pay-detail" id="pay-detail">
+      <div class="pay-detail-head">
+        <div style="display:flex;align-items:center;gap:12px;"><svg id="pay-detail-logo" class="pay-logo-svg" style="width:40px;height:40px;margin:0;" viewBox="0 0 48 48"></svg><span>Total yang harus dibayar</span></div>
+        <div class="pay-total" id="pay-total">IDR 0</div>
+      </div>
+
+      <div class="pay-qris" id="pay-qris">
+        <div class="pay-qris-box" id="pay-qris-box"></div>
+        <div style="font-size:0.75rem;color:var(--muted);">Scan dengan aplikasi e-wallet / m-banking apa pun</div>
+      </div>
+
+      <div class="pay-row" id="pay-row-number">
+        <div>
+          <div class="pay-row-label" id="pay-number-label">Nomor</div>
+          <div class="pay-row-value" id="pay-number">-</div>
+        </div>
+        <button type="button" class="pay-copy" onclick="copyText('pay-number')">Salin</button>
+      </div>
+      <div class="pay-row">
+        <div>
+          <div class="pay-row-label">Atas Nama</div>
+          <div class="pay-row-value" id="pay-holder">-</div>
+        </div>
+      </div>
+      <div class="pay-row">
+        <div>
+          <div class="pay-row-label">Nominal Transfer</div>
+          <div class="pay-row-value" id="pay-amount">-</div>
+        </div>
+        <button type="button" class="pay-copy" onclick="copyAmount()">Salin</button>
+      </div>
+
+      <ol class="pay-steps" id="pay-steps"></ol>
+
+      <div class="pay-note">
+        📸 Setelah membayar, klik tombol di bawah dan <b>kirim bukti transfer</b> langsung di chat WhatsApp kami agar akun segera diaktifkan.
+      </div>
+    </div>
+    <div class="pay-secure">🔒 Pembayaran dikonfirmasi manual oleh admin FelitaStore.ID</div>
+
+    <button class="btn-primary" style="width:100%;justify-content:center;border-radius:14px;font-size:0.95rem;margin-top:22px;" onclick="submitOrder()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Konfirmasi &amp; Kirim via WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- DEVELOPER (layar terpisah) -->
+<section class="dev-section app-screen-section screen-dev" id="dev">
+  <div class="dev-wrap">
+    <button class="dev-back" onclick="showScreen('home')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Kembali
+    </button>
+
+    <div class="section-header" style="text-align:center;margin-bottom:28px;">
+      <div class="section-tag">Tentang Website</div>
+      <h2 class="section-title">Informasi Developer</h2>
+      <p class="section-sub">Siapa yang membuat dan mengelola FelitaStore.ID</p>
+    </div>
+
+    <div class="dev-card">
+      <div class="dev-avatar" id="dev-avatar">🪐</div>
+      <div class="dev-name" id="dev-name">Developer</div>
+      <div class="dev-role" id="dev-role">Pembuat &amp; pengelola website</div>
+      <p class="dev-bio" id="dev-bio"></p>
+      <div class="dev-links" id="dev-links"></div>
+    </div>
+
+    <div class="dev-grid">
+      <div class="dev-box">
+        <h4>📋 Detail Website</h4>
+        <div class="dev-row"><span>Nama</span><b>FelitaStore.ID</b></div>
+        <div class="dev-row"><span>Versi</span><b id="dev-version">1.0</b></div>
+        <div class="dev-row"><span>Dirilis</span><b id="dev-released">-</b></div>
+        <div class="dev-row"><span>Jenis</span><b>Website toko aplikasi premium</b></div>
+      </div>
+      <div class="dev-box">
+        <h4>🛠️ Teknologi</h4>
+        <div class="dev-tags">
+          <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Broadcast Promo</span><span>Netlify</span>
+        </div>
+        <h4 style="margin-top:18px;">✨ Fitur</h4>
+        <div class="dev-tags">
+          <span>Info Promo</span><span>Pembayaran</span><span>Lapor Kendala</span><span>Musik Latar</span><span>Responsif HP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-banner" style="margin-top:22px;">
+      <div class="help-banner-icon">💬</div>
+      <div class="help-banner-text">
+        <b>Butuh website seperti ini?</b>
+        <span>Hubungi developer lewat kontak di atas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="app-screen-section screen-home">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo" style="font-size:1.3rem;">FelitaStore<span style="-webkit-text-fill-color:#fff">.ID</span></div>
+        <p>Toko aplikasi premium terpercaya dengan harga terjangkau. Netflix, Spotify, YouTube, CapCut, Canva & Noktel Telegram tersedia untuk kamu.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produk</h4>
+        <ul>
+          <li><a href="#netflix" onclick="goToProduct('netflix');return false;">Netflix Premium</a></li>
+          <li><a href="#spotify" onclick="goToProduct('spotify');return false;">Spotify Premium</a></li>
+          <li><a href="#youtube" onclick="goToProduct('youtube');return false;">YouTube Premium</a></li>
+          <li><a href="#capcut" onclick="goToProduct('capcut');return false;">CapCut Pro</a></li>
+          <li><a href="#canva" onclick="goToProduct('canva');return false;">Canva Pro</a></li>
+          <li><a href="#noktel" onclick="goToProduct('noktel');return false;">Noktel Telegram</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <ul>
+          <li><a href="https://wa.me/6285167846280" target="_blank">WhatsApp</a></li>
+          <li><a href="https://t.me/FelitaStoreID" target="_blank">Telegram</a></li>
+          <li><a href="https://instagram.com/Felitastoree.id" target="_blank">Instagram</a></li>
+          <li><a href="#order" onclick="showScreen('order');return false;">Form Pesanan</a></li>
+          <li><a href="#dev" onclick="showScreen('dev');return false;">Developer Website</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footer-year">2026</span> FelitaStore.ID — All rights reserved · <a href="#dev" onclick="showScreen('dev');return false;" class="footer-dev-link">Info Developer</a></span>
+      <a href="https://instagram.com/Felitastoree.id" target="_blank" class="footer-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @Felitastoree.id
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/6285167846280?text=Halo%20FelitaStore.ID!%20Saya%20ingin%20konsultasi%20mengenai%20pembelian%20aplikasi%20premium." target="_blank" class="wa-float">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-float-text">Konsultasi WA</span>
+</a>
+
+<!-- PROMO / BROADCAST (layar terpisah) -->
+<section class="promo-section app-screen-section screen-promo" id="promo">
+  <div class="promo-wrap">
+    <div class="section-header" style="text-align:center;margin-bottom:28px;">
+      <div class="section-tag">Info &amp; Promo</div>
+      <h2 class="section-title">Promo Terbaru</h2>
+      <p class="section-sub">Info promo, diskon, dan pengumuman langsung dari FelitaStore.ID</p>
+    </div>
+    <div class="promo-list" id="promo-list"><div class="promo-empty">Memuat info promo…</div></div>
+  </div>
+</section>
+
+<!-- POPUP BROADCAST -->
+<div class="promo-pop-overlay" id="promo-pop" onclick="if(event.target===this)closePromoPop()">
+  <div class="promo-pop">
+    <button class="promo-pop-close" onclick="closePromoPop()" aria-label="Tutup">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="promo-pop-icon" id="promo-pop-icon">🎁</div>
+    <h3 id="promo-pop-title"></h3>
+    <p id="promo-pop-body"></p>
+    <div class="promo-actions" style="justify-content:center;">
+      <a class="promo-link" id="promo-pop-link" target="_blank" rel="noopener" style="display:none;"></a>
+      <button class="promo-link" style="border:none;cursor:pointer;font-family:'Poppins',sans-serif;" onclick="closePromoPop();showScreen('promo')">Lihat semua promo</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL ADMIN PROMO (buka lewat alamat-website/#admin) -->
+<section class="adm-section app-screen-section screen-admin" id="admin">
+  <div class="adm-wrap">
+    <div class="section-header" style="text-align:center;margin-bottom:24px;">
+      <div class="section-tag">Admin</div>
+      <h2 class="section-title">Kelola Info Promo</h2>
+    </div>
+    <div class="adm-warn">Tambah / ubah info di sini → klik <b>Unduh index.html baru</b> → upload file itu ke hosting (timpa yang lama). Tanpa database, tanpa API key, tanpa edit kode.</div>
+
+    <div class="adm-card">
+      <label>Judul *</label>
+      <input id="a-title" maxlength="80" placeholder="Contoh: Diskon 20% Netflix Weekend!">
+      <label>Isi pesan</label>
+      <textarea id="a-body" maxlength="600" placeholder="Detail promo, syarat, dll."></textarea>
+      <div class="adm-row">
+        <div><label>Jenis</label>
+          <select id="a-type"><option value="promo">🔥 Promo</option><option value="diskon">💸 Diskon</option><option value="info">📢 Info</option><option value="stok">📦 Stok</option><option value="maintenance">🛠️ Maintenance</option></select></div>
+        <div><label>Kode promo (opsional)</label><input id="a-code" maxlength="30" placeholder="FELITA20"></div>
+      </div>
+      <div class="adm-row">
+        <div><label>Link tombol (opsional)</label><input id="a-link" placeholder="https://wa.me/62..."></div>
+        <div><label>Teks tombol</label><input id="a-linklabel" maxlength="30" placeholder="Pesan sekarang"></div>
+      </div>
+      <label>Berlaku sampai (opsional, otomatis hilang setelahnya)</label>
+      <input id="a-exp" type="datetime-local">
+      <label class="adm-check"><input type="checkbox" id="a-pin"> 📌 Sematkan di paling atas</label>
+      <button type="button" class="adm-btn" onclick="admAdd()">➕ Tambah Info</button>
+      <div class="adm-msg" id="adm-msg"></div>
+    </div>
+
+    <div class="adm-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+        <b style="font-size:.95rem">Daftar info</b>
+        <div class="adm-acts">
+          <button type="button" class="adm-ghost" onclick="admCopy()">Salin JSON</button>
+          <button type="button" class="adm-ghost" onclick="admDownload()">⬇️ Unduh index.html baru</button>
+        </div>
+      </div>
+      <div id="adm-dirty" class="adm-msg" style="color:#ffd77a;margin:0 0 10px;"></div>
+      <div id="adm-list"></div>
+    </div>
+    <button type="button" class="adm-ghost" onclick="location.hash='';showScreen('home')">← Kembali ke website</button>
+  </div>
+</section>
+
+<!-- DATA PROMO (diubah otomatis oleh panel admin; jangan hapus) -->
+<script type="application/json" id="promo-data">{ "promos": [] }</script>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toast-icon">✅</span>
+  <span id="toast-msg">Ditambahkan ke keranjang!</span>
+</div>
+
+<script>
+  // ═══════════════════════════════════════════════════════════
+  //  PENGATURAN WEBSITE — EDIT DI SINI SAJA
+  // ═══════════════════════════════════════════════════════════
+  const SITE_CONFIG = {
+
+    // Musik latar otomatis (tanpa tombol). Isi link/nama file mp3 milikmu.
+    // Tips: taruh musik.mp3 satu folder dengan index.html lalu isi 'musik.mp3'
+    MUSIC_URL: '',
+    MUSIC_VOLUME: 0.4,
+
+    // Informasi developer (halaman "Info Developer"). Kolom kosong otomatis disembunyikan.
+    DEVELOPER: {
+      name: 'Developer FelitaStore.ID',
+      role: 'Pembuat & pengelola website',
+      bio: 'Website ini dibuat untuk memudahkan pembelian aplikasi premium dengan proses cepat, aman, dan konfirmasi langsung lewat WhatsApp.',
+      photo: '',                    // link foto (opsional); kosong = ikon planet
+      whatsapp: '6285167846280',
+      telegram: 'FelitaStoreID',
+      instagram: 'Felitastoree.id',
+      email: ''
+    },
+    VERSION: '1.0',
+    RELEASED: 'Oktober 2026'
+  };
+  const MUSIC_URL = SITE_CONFIG.MUSIC_URL;
+  // ─── CART STATE ───
+  let cart = [];
+  const appColors = {
+    'Netflix': '#e50914',
+    'Spotify': '#b24bf3',
+    'YouTube': '#ff4444',
+    'CapCut': '#ff5fa2',
+    'Canva': '#a855f7',
+    'Noktel': '#2aabee'
+  };
+  const appLogoId = { Netflix:'logo-netflix', Spotify:'logo-spotify', YouTube:'logo-youtube', CapCut:'logo-capcut', Canva:'logo-canva', Noktel:'logo-telegram' };
+  const appEmojis = {
+    'Netflix': '🎬',
+    'Spotify': '🎵',
+    'YouTube': '▶️',
+    'CapCut': '✂️',
+    'Canva': '🎨',
+    'Noktel': '📱'
+  };
+
+
+  // ─── PAYMENT CONFIG (EDIT DATA DI SINI) ───
+  const PAYMENTS = {
+    QRIS:  { name:'QRIS',  type:'Semua E-Wallet', color:'linear-gradient(135deg,#e50914,#ff6b6b)', label:'QRIS', qris:true,
+             image:'', // isi dengan link/base64 gambar QRIS kamu, contoh: 'qris.png'
+             number:'', holder:'FelitaStore.ID' },
+    DANA:  { name:'DANA',  type:'E-Wallet', color:'#118eea', label:'DANA', number:'08xxxxxxxxxx', holder:'FelitaStore.ID' },
+    OVO:   { name:'OVO',   type:'E-Wallet', color:'#4c2a86', label:'OVO',  number:'08xxxxxxxxxx', holder:'FelitaStore.ID' },
+    GOPAY: { name:'GoPay', type:'E-Wallet', color:'#00aa13', label:'GoPay',number:'08xxxxxxxxxx', holder:'FelitaStore.ID' },
+    BCA:   { name:'BCA',   type:'Transfer Bank', color:'#0060af', label:'BCA', number:'xxxxxxxxxx', holder:'FelitaStore.ID' },
+    BRI:   { name:'BRI',   type:'Transfer Bank', color:'#00529c', label:'BRI', number:'xxxxxxxxxxxxxxx', holder:'FelitaStore.ID' }
+  };
+  const PAY_ICONS = { QRIS:'pay-qris', DANA:'pay-dana', OVO:'pay-ovo', GOPAY:'pay-gopay', BCA:'pay-bca', BRI:'pay-bri' };
+  let selectedPay = null;
+
+  function renderPayMethods() {
+    document.getElementById('pay-methods').innerHTML = Object.entries(PAYMENTS).map(([key, p]) => `
+      <div class="pay-method ${selectedPay === key ? 'active' : ''}" onclick="selectPayment('${key}')">
+        <svg class="pay-logo-svg" viewBox="0 0 48 48"><use href="#${PAY_ICONS[key]}"/></svg>
+        <div class="pay-name">${p.name}</div>
+        <div class="pay-type">${p.type}</div>
+      </div>`).join('');
+  }
+
+  function selectPayment(key) {
+    selectedPay = key;
+    renderPayMethods();
+    updatePaymentDetail();
+    document.getElementById('pay-detail').scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
+  function updatePaymentDetail() {
+    const box = document.getElementById('pay-detail');
+    if (!selectedPay) { box.classList.remove('show'); return; }
+    const p = PAYMENTS[selectedPay];
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const isBank = p.type === 'Transfer Bank';
+
+    box.classList.add('show');
+    document.getElementById('pay-detail-logo').innerHTML = '<use href="#' + PAY_ICONS[selectedPay] + '"/>';
+    document.getElementById('pay-total').textContent = fmt(total);
+    document.getElementById('pay-amount').textContent = fmt(total);
+    document.getElementById('pay-holder').textContent = p.holder;
+
+    const qris = document.getElementById('pay-qris');
+    const numRow = document.getElementById('pay-row-number');
+    if (p.qris) {
+      qris.classList.add('show');
+      numRow.style.display = 'none';
+      document.getElementById('pay-qris-box').innerHTML = p.image
+        ? `<img src="${p.image}" alt="QRIS FelitaStore.ID">`
+        : 'Gambar QRIS belum dipasang.<br>Isi <b>image</b> pada PAYMENTS.QRIS';
+    } else {
+      qris.classList.remove('show');
+      numRow.style.display = 'flex';
+      document.getElementById('pay-number-label').textContent = isBank ? 'No. Rekening ' + p.name : 'Nomor ' + p.name;
+      document.getElementById('pay-number').textContent = p.number;
+    }
+
+    const steps = p.qris
+      ? ['Buka aplikasi e-wallet atau m-banking kamu', 'Pilih menu <b>Scan / Bayar</b> lalu scan kode QRIS di atas', 'Masukkan nominal <b>' + fmt(total) + '</b> lalu konfirmasi', 'Screenshot bukti bayar dan kirim via WhatsApp']
+      : isBank
+      ? ['Buka aplikasi m-banking / ATM ' + p.name, 'Pilih <b>Transfer</b> ke nomor rekening di atas', 'Masukkan nominal <b>' + fmt(total) + '</b>', 'Screenshot bukti transfer dan kirim via WhatsApp']
+      : ['Buka aplikasi <b>' + p.name + '</b> kamu', 'Pilih <b>Kirim / Transfer</b> ke nomor di atas', 'Masukkan nominal <b>' + fmt(total) + '</b>', 'Screenshot bukti bayar dan kirim via WhatsApp'];
+    document.getElementById('pay-steps').innerHTML = steps.map(t => `<li>${t}</li>`).join('');
+  }
+
+  function copyText(id) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(
+      () => showToast('📋', 'Nomor disalin!'),
+      () => showToast('⚠️', 'Gagal menyalin, salin manual ya')
+    );
+  }
+
+  function copyAmount() {
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    navigator.clipboard.writeText(String(total)).then(
+      () => showToast('📋', 'Nominal disalin!'),
+      () => showToast('⚠️', 'Gagal menyalin, salin manual ya')
+    );
+  }
+
+
+  function escapeHtml(t) { return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // ═══════════════════════════════════════════
+  //  BROADCAST PROMO (dikelola lewat admin.html)
+  // ═══════════════════════════════════════════
+  const PROMO_TYPES = { promo:'🔥 Promo', diskon:'💸 Diskon', info:'📢 Info', stok:'📦 Stok', maintenance:'🛠️ Maintenance' };
+  let promos = [];
+
+  function safeUrl(u) { return /^(https?:\/\/|https:\/\/wa\.me\/|https:\/\/t\.me\/)/i.test(u || '') ? u : ''; }
+
+  function rawPromos() {
+    try { const j = JSON.parse(document.getElementById('promo-data').textContent); return Array.isArray(j) ? j : (j.promos || []); } catch (e) { return []; }
+  }
+
+  function loadPromos() {
+    const list = rawPromos();
+    const now = Date.now();
+    promos = list
+      .filter(p => p && p.title && p.active !== false && (!p.expires || p.expires > now))
+      .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || (b.createdAt || 0) - (a.createdAt || 0));
+    renderPromos();
+    maybeShowPromoPop();
+  }
+
+  function seenPromos() { try { return JSON.parse(localStorage.getItem('felita_seen_promos') || '[]'); } catch (e) { return []; } }
+  function markPromosSeen() {
+    try { localStorage.setItem('felita_seen_promos', JSON.stringify(promos.map(p => p.id))); } catch (e) {}
+    renderPromoBadge();
+  }
+
+  function renderPromoBadge() {
+    const seen = seenPromos();
+    const n = promos.filter(p => !seen.includes(p.id)).length;
+    const dot = document.getElementById('promo-dot');
+    if (dot) { dot.textContent = n; dot.style.display = n > 0 ? 'flex' : 'none'; }
+    const top = document.getElementById('promo-dot-top');
+    if (top) { top.textContent = n; top.style.display = n > 0 ? 'flex' : 'none'; }
+  }
+
+  function renderPromos() {
+    const el = document.getElementById('promo-list');
+    const seen = seenPromos();
+    if (!promos.length) {
+      el.innerHTML = '<div class="promo-empty">Belum ada promo saat ini. Cek lagi nanti ya 💜</div>';
+    } else {
+      el.innerHTML = promos.map(p => {
+        const d = p.createdAt ? new Date(p.createdAt).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' }) : '';
+        const exp = p.expires ? ' · berlaku s/d ' + new Date(p.expires).toLocaleDateString('id-ID', { day:'numeric', month:'short' }) : '';
+        const url = safeUrl(p.link);
+        return '<div class="promo-card' + (p.pinned ? ' pinned' : '') + (seen.includes(p.id) ? '' : ' is-new') + '">'
+          + '<div class="promo-meta"><span class="promo-type">' + escapeHtml(PROMO_TYPES[p.type] || PROMO_TYPES.info) + '</span>'
+          + (p.pinned ? '<span>📌 Disematkan</span>' : '') + '<span>' + escapeHtml(d + exp) + '</span></div>'
+          + '<div class="promo-title">' + escapeHtml(p.title) + '</div>'
+          + (p.body ? '<div class="promo-body">' + escapeHtml(p.body) + '</div>' : '')
+          + (p.code ? '<button type="button" class="promo-code" onclick="copyPromoCode(this.dataset.c)" data-c="' + escapeHtml(p.code) + '">🏷️ ' + escapeHtml(p.code) + ' <span style="font-weight:500;font-size:0.7rem;color:var(--muted);">(ketuk untuk salin)</span></button>' : '')
+          + (url ? '<div class="promo-actions"><a class="promo-link" target="_blank" rel="noopener" href="' + escapeHtml(url) + '">' + escapeHtml(p.linkLabel || 'Lihat detail') + '</a></div>' : '')
+          + '</div>';
+      }).join('');
+    }
+    renderPromoBadge();
+  }
+
+  function copyPromoCode(c) {
+    navigator.clipboard.writeText(c).then(
+      () => showToast('📋', 'Kode ' + c + ' disalin!'),
+      () => showToast('⚠️', 'Gagal menyalin, salin manual ya')
+    );
+  }
+
+  function maybeShowPromoPop() {
+    if (popShown || !promos.length) return;
+    const seen = seenPromos();
+    const fresh = promos.find(p => !seen.includes(p.id));
+    if (!fresh) return;
+    popShown = true;
+    document.getElementById('promo-pop-icon').textContent = (PROMO_TYPES[fresh.type] || '🎁').split(' ')[0];
+    document.getElementById('promo-pop-title').textContent = fresh.title;
+    document.getElementById('promo-pop-body').textContent = fresh.body || '';
+    const a = document.getElementById('promo-pop-link');
+    const url = safeUrl(fresh.link);
+    if (url) { a.href = url; a.textContent = fresh.linkLabel || 'Lihat detail'; a.style.display = 'inline-flex'; } else { a.style.display = 'none'; }
+    setTimeout(() => document.getElementById('promo-pop').classList.add('open'), 1200);
+  }
+  let popShown = false;
+
+  function closePromoPop() { document.getElementById('promo-pop').classList.remove('open'); }
+
+
+
+  // ═══════════════════════════════════════════
+  //  PANEL ADMIN (alamat-website/#admin) — hasilnya file index.html baru
+  // ═══════════════════════════════════════════
+  const ADM_KEY = 'felita_admin_draft';
+  let admItems = [];
+
+  function initAdmin() {
+    try { const d = JSON.parse(localStorage.getItem(ADM_KEY)); admItems = Array.isArray(d) ? d : rawPromos(); } catch (e) { admItems = rawPromos(); }
+    admRender();
+    const check = () => { if (location.hash === '#admin') showScreen('admin'); };
+    window.addEventListener('hashchange', check); check();
+  }
+  function admPersist() {
+    try { localStorage.setItem(ADM_KEY, JSON.stringify(admItems)); } catch (e) {}
+    document.getElementById('adm-dirty').textContent = '⚠️ Ada perubahan — klik "Unduh index.html baru" lalu upload ke hosting.';
+    admRender();
+  }
+  function admAdd() {
+    const g = id => document.getElementById(id);
+    const m = g('adm-msg'); m.style.color = '#ff6b6b';
+    const title = g('a-title').value.trim();
+    if (!title) { m.textContent = 'Judul wajib diisi.'; return; }
+    const link = g('a-link').value.trim();
+    if (link && !/^https?:\/\//i.test(link)) { m.textContent = 'Link harus diawali http:// atau https://'; return; }
+    admItems.unshift({
+      id: 'p' + Date.now().toString(36), title, body: g('a-body').value.trim(), type: g('a-type').value,
+      code: g('a-code').value.trim(), link, linkLabel: g('a-linklabel').value.trim(),
+      expires: g('a-exp').value ? new Date(g('a-exp').value).getTime() : 0,
+      pinned: g('a-pin').checked, active: true, createdAt: Date.now()
+    });
+    ['a-title','a-body','a-code','a-link','a-linklabel','a-exp'].forEach(i => g(i).value = ''); g('a-pin').checked = false;
+    m.style.color = '#5fe39a'; m.textContent = '✅ Ditambahkan. Jangan lupa unduh index.html baru & upload.';
+    admPersist();
+  }
+  function admRender() {
+    const el = document.getElementById('adm-list'); if (!el) return;
+    if (!admItems.length) { el.innerHTML = '<p style="color:var(--muted);font-size:.82rem;">Belum ada info.</p>'; return; }
+    const now = Date.now();
+    el.innerHTML = admItems.map((p, i) => {
+      const expired = p.expires && p.expires < now, live = p.active !== false && !expired;
+      return '<div class="adm-item"><h4>' + escapeHtml(p.title) + '</h4><div class="adm-tags"><span class="adm-tag">' + escapeHtml(PROMO_TYPES[p.type] || PROMO_TYPES.info) + '</span>'
+        + (live ? '<span class="adm-tag">Tayang</span>' : '<span class="adm-tag off">' + (expired ? 'Kedaluwarsa' : 'Disembunyikan') + '</span>')
+        + (p.pinned ? '<span class="adm-tag">📌 Disematkan</span>' : '') + (p.code ? '<span class="adm-tag">Kode: ' + escapeHtml(p.code) + '</span>' : '') + '</div>'
+        + (p.body ? '<p>' + escapeHtml(p.body) + '</p>' : '')
+        + '<div class="adm-acts" style="margin-top:10px">'
+        + '<button type="button" class="adm-ghost" onclick="admToggle(' + i + ',\'active\')">' + (p.active === false ? 'Tayangkan' : 'Sembunyikan') + '</button>'
+        + '<button type="button" class="adm-ghost" onclick="admToggle(' + i + ',\'pinned\')">' + (p.pinned ? 'Lepas sematan' : 'Sematkan') + '</button>'
+        + '<button type="button" class="adm-ghost del" onclick="admDel(' + i + ')">Hapus</button></div></div>';
+    }).join('');
+  }
+  function admToggle(i, k) { admItems[i][k] = k === 'active' ? (admItems[i].active === false) : !admItems[i].pinned; admPersist(); }
+  function admDel(i) { if (confirm('Hapus info ini?')) { admItems.splice(i, 1); admPersist(); } }
+  function admJson() { return JSON.stringify({ promos: admItems }, null, 2).replace(/</g, '\\u003c'); }
+  function admCopy() {
+    navigator.clipboard.writeText(admJson()).then(
+      () => showToast('📋', 'JSON disalin. Tempel di blok promo-data pada index.html.'),
+      () => showToast('⚠️', 'Gagal menyalin'));
+  }
+  async function admDownload() {
+    try {
+      const r = await fetch(location.href.split('#')[0], { cache: 'no-store' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      let html = await r.text();
+      const re = /(<script type="application\/json" id="promo-data">)[\s\S]*?(<\/script>)/;
+      if (!re.test(html)) throw new Error('blok promo-data tidak ditemukan');
+      html = html.replace(re, (m, a, b) => a + admJson() + b);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+      a.download = 'index.html'; a.click();
+      showToast('✅', 'index.html baru terunduh. Upload ke hosting.');
+    } catch (e) {
+      showToast('⚠️', 'Unduh otomatis gagal (buka lewat website yang sudah online). Pakai "Salin JSON".');
+    }
+  }
+
+  // ─── PRICE SLIDER ───
+  function initSliders() {
+    document.querySelectorAll('.price-grid').forEach(grid => {
+      if (grid.dataset.slider) return;
+      grid.dataset.slider = '1';
+      grid.classList.add('slider-track');
+
+      const wrap = document.createElement('div');
+      wrap.className = 'slider';
+      grid.parentNode.insertBefore(wrap, grid);
+      wrap.appendChild(grid);
+
+      const chevL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
+      const chevR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+
+      const prev = document.createElement('button');
+      prev.className = 'slider-btn prev'; prev.type = 'button'; prev.setAttribute('aria-label','Sebelumnya'); prev.innerHTML = chevL;
+      const next = document.createElement('button');
+      next.className = 'slider-btn next'; next.type = 'button'; next.setAttribute('aria-label','Berikutnya'); next.innerHTML = chevR;
+      wrap.appendChild(prev); wrap.appendChild(next);
+
+      const bar = document.createElement('div');
+      bar.className = 'slider-bar';
+      bar.innerHTML = '<div class="slider-bar-fill"></div>';
+      wrap.appendChild(bar);
+      const fill = bar.firstChild;
+
+      const hint = document.createElement('div');
+      hint.className = 'slider-hint';
+      hint.innerHTML = '<span>← Geser untuk melihat paket lain →</span><span class="slider-count"></span>';
+      wrap.appendChild(hint);
+      const count = hint.querySelector('.slider-count');
+
+      const step = () => {
+        const c = grid.querySelector('.price-card');
+        return c ? c.getBoundingClientRect().width + 14 : 250;
+      };
+
+      prev.onclick = () => grid.scrollBy({ left: -step() * 2, behavior: 'smooth' });
+      next.onclick = () => grid.scrollBy({ left:  step() * 2, behavior: 'smooth' });
+
+      const update = () => {
+        const max = grid.scrollWidth - grid.clientWidth;
+        const total = grid.querySelectorAll('.price-card').length;
+        if (max <= 4) {
+          prev.classList.add('hide'); next.classList.add('hide');
+          bar.style.display = 'none'; hint.style.display = 'none';
+          return;
+        }
+        bar.style.display = ''; hint.style.display = '';
+        prev.classList.toggle('hide', grid.scrollLeft <= 4);
+        next.classList.toggle('hide', grid.scrollLeft >= max - 4);
+        const ratio = grid.clientWidth / grid.scrollWidth;
+        fill.style.width = (ratio * 100) + '%';
+        fill.style.marginLeft = ((grid.scrollLeft / max) * (100 - ratio * 100)) + '%';
+        const first = Math.min(total, Math.round(grid.scrollLeft / step()) + 1);
+        const visible = Math.max(1, Math.round(grid.clientWidth / step()));
+        count.textContent = Math.min(total, first + visible - 1) + ' / ' + total + ' paket';
+      };
+
+      grid.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+      setTimeout(update, 300);
+    });
+  }
+
+  // ═══════════════════════════════════════════
+  //  MUSIK LATAR — otomatis, tanpa tombol
+  // ═══════════════════════════════════════════
+  let musicAudio = null;
+  function startBackgroundMusic() {
+    if (!MUSIC_URL) return;                       // tidak ada link = tidak ada musik
+    musicAudio = new Audio(MUSIC_URL);
+    musicAudio.loop = true;
+    musicAudio.preload = 'auto';
+    musicAudio.volume = 0;
+    const target = SITE_CONFIG.MUSIC_VOLUME;
+    const fadeIn = () => {
+      let v = 0;
+      const t = setInterval(() => { v = Math.min(target, v + 0.02); musicAudio.volume = v; if (v >= target) clearInterval(t); }, 80);
+    };
+    const events = ['pointerdown', 'touchend', 'keydown', 'click', 'scroll'];
+    const cleanup = () => events.forEach(e => document.removeEventListener(e, onGesture, true));
+    function onGesture() {
+      musicAudio.play().then(() => { cleanup(); fadeIn(); }).catch(() => {});
+    }
+    // coba langsung putar; kalau diblokir browser, mulai di sentuhan/klik pertama
+    musicAudio.play().then(fadeIn).catch(() => {
+      events.forEach(e => document.addEventListener(e, onGesture, true));
+    });
+    // jeda saat tab disembunyikan, lanjut saat dibuka lagi
+    document.addEventListener('visibilitychange', () => {
+      if (!musicAudio) return;
+      if (document.hidden) musicAudio.pause();
+      else if (musicAudio.currentTime > 0) musicAudio.play().catch(() => {});
+    });
+  }
+
+  // ═══════════════════════════════════════════
+  //  INFO DEVELOPER (layar terpisah)
+  // ═══════════════════════════════════════════
+  function renderDeveloper() {
+    const d = SITE_CONFIG.DEVELOPER || {};
+    document.getElementById('dev-name').textContent = d.name || 'Developer';
+    document.getElementById('dev-role').textContent = d.role || '';
+    document.getElementById('dev-bio').textContent = d.bio || '';
+    document.getElementById('dev-version').textContent = SITE_CONFIG.VERSION;
+    document.getElementById('dev-released').textContent = SITE_CONFIG.RELEASED;
+    if (d.photo) document.getElementById('dev-avatar').innerHTML = '<img src="' + escapeHtml(d.photo) + '" alt="">';
+    const links = [];
+    if (d.whatsapp) links.push(['WhatsApp', 'https://wa.me/' + d.whatsapp]);
+    if (d.telegram) links.push(['Telegram', 'https://t.me/' + d.telegram]);
+    if (d.instagram) links.push(['Instagram', 'https://instagram.com/' + d.instagram]);
+    if (d.email) links.push(['Email', 'mailto:' + d.email]);
+    document.getElementById('dev-links').innerHTML = links.map(l =>
+      '<a class="dev-link" target="_blank" rel="noopener" href="' + escapeHtml(l[1]) + '">' + l[0] + '</a>').join('');
+    const y = document.getElementById('footer-year'); if (y) y.textContent = new Date().getFullYear();
+  }
+
+  function fmt(n) {
+    return 'IDR ' + n.toLocaleString('id-ID');
+  }
+
+  function addToCart(app, plan, price) {
+    const existing = cart.find(i => i.app === app && i.plan === plan);
+    if (existing) {
+      showToast('⚠️', `${app} - ${plan} sudah ada di keranjang`);
+      return;
+    }
+    cart.push({ id: Date.now(), app, plan, price });
+    renderCart();
+    updateOrderSummary();
+    showToast('✅', `${app} - ${plan} ditambahkan!`);
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(i => i.id !== id);
+    renderCart();
+    updateOrderSummary();
+  }
+
+  function clearCart() {
+    cart = [];
+    renderCart();
+    updateOrderSummary();
+  }
+
+  function renderCart() {
+    const countEls = document.querySelectorAll('.cart-count');
+    countEls.forEach(el => {
+      el.textContent = cart.length;
+      el.style.display = cart.length > 0 ? 'flex' : 'none';
+    });
+  }
+
+  function updateOrderSummary() {
+    updatePaymentDetail();
+    const summaryEl = document.getElementById('order-summary');
+    const itemsEl = document.getElementById('order-summary-items');
+    if (cart.length === 0) {
+      summaryEl.style.display = 'none';
+      return;
+    }
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    summaryEl.style.display = 'block';
+    itemsEl.innerHTML = cart.map(i =>
+      `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+        <svg viewBox="0 0 48 48" width="28" height="28" style="flex-shrink:0;border-radius:7px;"><use href="#${appLogoId[i.app]}"/></svg>
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:600;">${i.app}</div>
+          <div style="font-size:0.72rem;color:var(--muted);">${i.plan}</div>
+        </div>
+        <span style="font-weight:700;white-space:nowrap;">${fmt(i.price)}</span>
+        <button type="button" onclick="removeFromCart(${i.id})" title="Hapus" style="flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>`
+    ).join('') + `<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;">
+      <span style="font-weight:800;">Total: <span style="color:var(--accent)">${fmt(total)}</span></span>
+      <button type="button" onclick="clearCart()" style="background:none;border:none;color:var(--muted);font-size:0.72rem;text-decoration:underline;cursor:pointer;">Kosongkan</button>
+    </div>`;
+  }
+
+  // ─── APP SCREENS (Beranda / Produk / Order terpisah) ───
+  function showScreen(name) {
+    document.querySelectorAll('.app-screen-section').forEach(el => el.classList.remove('screen-active'));
+    document.querySelectorAll('.screen-' + name).forEach(el => el.classList.add('screen-active'));
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    if (name === 'promo') setTimeout(markPromosSeen, 1500);
+    document.querySelectorAll('.app-nav-item').forEach(b => b.classList.remove('active'));
+    const navKey = name === 'products' ? 'netflix' : (name === 'order' ? 'order' : (name === 'promo' ? 'promo' : 'home'));
+    const navBtn = document.querySelector('.app-nav-item[data-nav="' + navKey + '"]');
+    if (navBtn) navBtn.classList.add('active');
+  }
+
+  function goToProduct(id) {
+    showScreen('products');
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 60);
+  }
+
+  function goToOrder() {
+    showScreen('order');
+  }
+
+  // ─── PAYMENT SCREEN (halaman terpisah) ───
+  function openPaymentScreen() {
+    const name = document.getElementById('cust-name').value.trim();
+    const wa = document.getElementById('cust-wa').value.trim();
+    if (!name) { showToast('⚠️', 'Masukkan nama kamu dulu!'); return; }
+    if (!wa) { showToast('⚠️', 'Masukkan nomor WhatsApp kamu!'); return; }
+    if (cart.length === 0) { showToast('⚠️', 'Keranjang masih kosong! Pilih produk dulu.'); return; }
+    updatePaymentDetail();
+    document.getElementById('payment-screen').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePaymentScreen() {
+    document.getElementById('payment-screen').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function submitOrder() {
+    const name = document.getElementById('cust-name').value.trim();
+    const wa = document.getElementById('cust-wa').value.trim();
+    const note = document.getElementById('cust-note').value.trim();
+
+    if (!name) { showToast('⚠️', 'Masukkan nama kamu dulu!'); return; }
+    if (!wa) { showToast('⚠️', 'Masukkan nomor WhatsApp kamu!'); return; }
+    if (cart.length === 0) { showToast('⚠️', 'Keranjang masih kosong! Pilih produk dulu.'); return; }
+    if (!selectedPay) { showToast('⚠️', 'Pilih metode pembayaran dulu di atas!'); return; }
+    const pay = PAYMENTS[selectedPay];
+
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const itemList = cart.map(i => `• ${appEmojis[i.app]} ${i.app} - ${i.plan} (${fmt(i.price)})`).join('\n');
+
+    const msg = `Halo FelitaStore.ID! 👋
+
+Saya ingin memesan aplikasi premium berikut:
+
+📋 *PESANAN:*
+${itemList}
+
+💰 *Total: ${fmt(total)}*
+💳 *Metode Bayar:* ${pay.name}
+
+👤 *Nama:* ${name}
+📱 *WA:* ${wa}${note ? `\n📝 *Catatan:* ${note}` : ''}
+
+Saya akan kirim bukti pembayaran setelah ini. Mohon konfirmasinya ya! Terima kasih 🙏`;
+
+    const url = `https://wa.me/6285167846280?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
+
+  function showToast(icon, msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-icon').textContent = icon;
+    document.getElementById('toast-msg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePromoPop(); closePaymentScreen(); } });
+
+  // ─── STARFIELD ───
+  function initStars() {
+    const holder = document.getElementById('stars-bg');
+    if (!holder) return;
+    const count = window.innerWidth < 768 ? 45 : 80;
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('div');
+      s.className = 'star-dot';
+      const size = Math.random() * 2 + 1;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDuration = (2 + Math.random() * 3) + 's';
+      s.style.animationDelay = (Math.random() * 3) + 's';
+      holder.appendChild(s);
+    }
+  }
+
+  // ─── BOTTOM APP NAV ───
+  function appNavGo(key, btn) {
+    if (key === 'promo') { showScreen('promo'); return; }
+    if (key === 'home') { showScreen('home'); return; }
+    if (key === 'netflix') { showScreen('products'); return; }
+    if (key === 'order') { showScreen('order'); return; }
+  }
+
+  // Init
+  initStars();
+  renderDeveloper();
+  showScreen('home');
+  startBackgroundMusic();
+  initSliders();
+  loadPromos();
+  initAdmin();
+  renderCart();
+  renderPayMethods();
+</script>
+<!-- BOTTOM APP NAV -->
+<nav class="app-bottom-nav">
+  <div class="app-bottom-nav-inner">
+    <button class="app-nav-item active" data-nav="home" onclick="appNavGo('home', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V9.5"/></svg>
+      Beranda
+    </button>
+    <button class="app-nav-item" data-nav="netflix" onclick="appNavGo('netflix', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 4v16M16 4v16"/></svg>
+      Produk
+    </button>
+    <button class="app-nav-item" data-nav="order" onclick="appNavGo('order', this)" style="position:relative;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      <span class="cart-count">0</span>
+      Pesan
+    </button>
+    <button class="app-nav-item" data-nav="promo" onclick="appNavGo('promo', this)" style="position:relative;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 001 1h2l5 4V6L6 10H4a1 1 0 00-1 1z"/><path d="M15.5 8.5a5 5 0 010 7"/><path d="M18.5 5.5a9 9 0 010 13"/></svg>
+      <span class="promo-dot" id="promo-dot">0</span>
+      Promo
+    </button>
+  </div>
+</nav>
+
+</body>
+</html>
